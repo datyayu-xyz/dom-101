@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>nodo.setAttribute | DOM-101</title>
+</head>
+<body>
+    <h1>Hey! Revisa tu consola!</h1>
+
+<script>
+    var elemento = document.createElement('input');
+    elemento.setAttribute('type', 'text'); // Es lo mismo que << elemento.type = 'text' >>`;
+    elemento.id = 'mi-input'; // Es lo mismo que << elemento.setAttribute('id', 'mi-input') >>
+
+    console.log(elemento); // <input type="text" id="mi-input">
+</script>
+</body>
+</html>

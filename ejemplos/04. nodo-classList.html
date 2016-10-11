@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>nodo.classList | DOM-101</title>
+</head>
+<body>
+    <h1>Hey! Revisa tu consola!</h1>
+
+<script>
+    var elemento = document.createElement('div');
+
+    elemento.classList.add('hello');
+    elemento.classList.add('hello');
+    console.log(elemento.classList.contains('hello')); // true
+
+    elemento.classList.remove('hello');
+    console.log(elemento.classList.contains('hello')); // false
+</script>
+</body>
+</html>

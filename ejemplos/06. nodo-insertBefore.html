@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>nodo.insertBefore | DOM-101</title>
+</head>
+<body>
+    <h1>Hey! Revisa tu consola!</h1>
+
+<script>
+    var contenedor = document.createElement('ul');
+    var hijo1 = document.createElement('li');
+    var hijo2 = document.createElement('li');
+
+    hijo1.textContent = '1';
+    hijo2.textContent = '2';
+
+    document.body.appendChild(contenedor);
+    contenedor.appendChild(hijo1);
+
+    contenedor.insertBefore(hijo2, hijo1);
+</script>
+</body>
+</html>
