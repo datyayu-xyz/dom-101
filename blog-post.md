@@ -1,8 +1,7 @@
 # DOM 101: Aprendiendo a usar el DOM desde 0.
+El DOM es un concepto que todo desarrollador web debe conocer. Aun así hay muchos que no saben como usarlo directamente, a pesar de que gracias a él es que podemos hacer páginas interactivas. Aprender a usar el DOM no sólo te ayuda a optimizar tu código y prevenir dependencias innecesarias sino que también te brinda un mejor entendimiento de como funcionan las cosas en tu pagina.
 
-El DOM es algo que todo desarrollador web debe conocer. Aun así hay muchos que no conocen como usarlo directamente, a pesar de que gracias a el podemos hacer páginas interactivas. Aprender a usar el DOM no sólo te ayuda a optimizar tu código y prevenir dependencias innecesarias sino que también te brinda un mejor entendimiento de como funcionan las cosas en tu pagina.
-
-Muchas veces por conveniencia terminamos dependiendo de librerías como jQuery para modificar el html de nuestra pagina. Pero, ¿alguna vez te haz preguntado si realmente vale la pena incluir una librería entera sólo para modificar un par de lineas? ¿Y qué pasa si no tienes acceso a jQuery? ¿Cómo puedes agregar contenido dinámicamente a una pagina sin depender de otras librerías? Bueno, en este post revisaremos como utilizar el DOM, la manera nativa de hacerlo sin necesidad de dependencias.
+Muchas veces por conveniencia terminamos dependiendo de librerías como jQuery para modificar el html de nuestra pagina. Pero, ¿alguna vez te haz preguntado si realmente vale la pena incluir una librería entera sólo para modificar un par de lineas? ¿Y qué pasa si no tienes acceso a jQuery? ¿Cómo puedes agregar contenido dinámicamente a una pagina sin depender de otras librerías? Bueno, en este post revisaremos como utilizar el DOM, la manera nativa de hacerlo, sin necesidad de dependencias.
 
 ---
 
@@ -11,22 +10,22 @@ Si tienes algún problema siguiendo este post o encuentras algo que esté incorr
 ---
 
 ## ¿Qué es el DOM?
-El DOM (Document Object Model) una representación con forma de árbol que contiene los nodos de html que se muestran en el navegador y que nos provee de bonitas APIs para trabajarlo de modificarlo y extenderlo por medio de javascript.
+El DOM (Document Object Model) es una representación con forma de árbol que contiene los nodos de html que se muestran en el navegador y que nos provee de bonitas APIs para modificarlo y extenderlo por medio de javascript.
 
-Puesto de otra forma, es la manera nativa en la que el navegador nos da acceso al contenido de nuestro html y también es por medio de este que podemos modificarlo y agregar interactividad a un sitio.
+Puesto de otra forma, es la manera en la que el navegador nos da acceso al contenido de nuestro html y también es por medio de este que podemos modificarlo y agregar interactividad a un sitio.
 
 Como dije antes, el DOM tiene una estructura con forma de arbol. Esta compuesto por nodos que tienen nodos hijos y así sucesivamente. Por ejemplo, el nodo `html` tiene dos hijos: `head` y `body`; y estos a su vez tienen más nodos hijos. `head` puede tener un `title` o un `meta`, y `body` puede tener un `h1` o un `p`.
 
-![](/content/images/2016/10/dom.gif)
+![](https://datyayu.xyz/content/images/2016/10/dom.gif)
 
 Tal vez es más fácil verlo como etiquetas de html dentro de otras etiquetas, pero es importante que tengamos en cuenta esa relación entre elementos o nodos padres e hijos, ya que al usar javascript para modificar el DOM se emplean mucho esos conceptos.
 
-
+---
 
 Después de revisar como se estructura el DOM, podemos empezar a ver como utilizarlo.
 
 ## Crear un elemento
-Lo primero a conocer, es que para crear elementos simplemente ocupamos usar la funcion `document.createElement(nombre-de-la-etiqueta)`, donde el nombre de la etiqueta puede ser cualquiera, como `div`, `ul` o `h1`.
+Lo primero a conocer, es que para crear elementos simplemente ocupamos usar la funcion `document.createElement('nombre-de-la-etiqueta')`, donde el nombre de la etiqueta puede ser cualquiera, como `div`, `ul` o `h1`.
 
 ```js
 var elemento = document.createElement('div');
@@ -34,7 +33,7 @@ console.log(elemento); // <div></div>
 ```
 
 ## Modificar un elemento
-Ya que sabemos como crear un elemento, ahora tenemos que agregarle algo de contenido. Para agregar texto a un nodo podemos hacerlo con `nodo.textContent = texto`.
+Ya que sabemos como crear un elemento, ahora tenemos que agregarle algo de contenido. Para agregar texto a un nodo podemos hacerlo con `nodo.textContent = 'texto'`.
 
 ```js
 var elemento = document.createElement('div');
@@ -47,13 +46,13 @@ También podemos cambiar los atributos de un elemento usando `nodo.setAttribute`
 
 ```js
 var elemento = document.createElement('input');
-elemento.setAttribute('type', 'text'); // Es lo mismo que << elemento.type = 'text' >>`;
-elemento.id = 'mi-input'; // Es lo mismo que << elemento.setAttribute('id', 'mi-input') >>
+elemento.setAttribute('type', 'text');
+elemento.id = 'mi-input';
 
 console.log(elemento); // <input type="text" id="mi-input">
 ```
 
-Como consejo, si vas a usar este metodo para trabajar classes, lo mejor es usar `nodo.classList` ya que esto nos brinda un mejor manejo de las mismas y evita tener más de una vez la misma clase en nuestro elemento.
+Como consejo, si vas a usar este método para agregar o remover clases de css, lo mejor es usar [`nodo.classList`](https://developer.mozilla.org/es/docs/Web/API/Element/classList) ya que esto nos brinda un mejor manejo de las mismas y evita tener más de una vez la misma clase en nuestro elemento.
 
 ```js
 var elemento = document.createElement('div');
@@ -82,7 +81,7 @@ document.body.appendChild(miNodo);
 
 <iframe width="100%" height="300" src="//jsfiddle.net/datyayu/hzxgbj4t/embedded/js,html,result/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
-Como aclaración, `document.body` se usa para referirse a la etiqueta `<body></body>` de nuestro html, así que en el ejemplo anterior agregamos el `div` que creamos al `body` de la página.
+Como aclaración, `document.body` se usa para referirse a la etiqueta `<body></body>` de nuestro html, así que en el ejemplo anterior agregamos el `<div>` que creamos al `<body>` de la página.
 
 También, si quieres agregar un elemento a un lado de otro (como nodos hermanos, y no como padre-hijo) puedes usar `nodoPadre.insertBefore(nodoAInsertar, nodoDeReferencia)`, donde le dices que  busque dentro del `nodoPadre` al `nodoDeReferencia` y ponga al `nodoAInsertar` justo antes de este.
 
@@ -145,21 +144,21 @@ Estás anteriores son bastantes especificas pero si quieres algo más general si
 var miElementoConId = document.querySelector('#id-del-elemento');
 var miElementoConClase = document.querySelector('.clase-del-elemto');
 var miElementoConEtiqueta = document.querySelector('div');
-var miElementoConSelectores = document.querySelector('div.elemento#mi-elemento');
+var miElementoConSelectores = document.querySelector('div#mi-elemento');
 ```
-Como vez, la ventaja de `querySelector` es que nos brinda una sintaxis más general y si estás familiarizado con jquery usar `querySelector` hará que tu código te sea super fácil de comprender. 
+Como vez, la ventaja de `querySelector` es que nos brinda una busqueda más flexible y si estás familiarizado con jQuery, usar `querySelector` es super fácil de entender. 
 
-También la diferencia entre `querySelector` y `querySelectorAll` es que el `querySelector` te regresa el primer elemento que encuentre con el selector que le especifiques, mientras que `querySelectorAll` te regresa una lista de todos los elementos que cumplan con ese selector.
+La diferencia entre `querySelector` y `querySelectorAll` es que el `querySelector` te regresa el primer elemento que encuentre con el selector que le especifiques, mientras que `querySelectorAll` te regresa una lista de todos los elementos que cumplan con ese selector.
 
 
 > #### NodeList vs Array
-> Como nota importante, a simple vista parecería que las funciones `getElementsByClassName`, `getElementsByTagName` y `querySelectorAll` te regresan un arreglo (Array) de elementos, pero en realidad lo que te regresa es un objeto llamado `NodeList`. Para la mayoría de los casos son iguales, pero `NodeList` carece de métodos como `forEach` o `entries` en navegadores viejos, por lo que hay que tener cuidado. Para iterar en un `NodeList`, puedes remplazar el `forEach` por un `for` si así lo requieres.
+> Como nota importante, a simple vista parecería que las funciones `getElementsByClassName`, `getElementsByTagName` y `querySelectorAll` te regresan un arreglo (`Array`) de elementos, pero en realidad lo que te regresa es un objeto llamado `NodeList`. Para la mayoría de los casos son iguales, pero `NodeList` carece de métodos como `forEach` o `entries` en navegadores viejos, por lo que hay que tener cuidado. Para iterar en un `NodeList`, puedes remplazar el `forEach` por un `for` si así lo requieres.
 
 > `for (var i = 0; i < miNodeList.length; ++i) {
 >  miNodeList[i] = /* cosas */
 > }`
 
-Y eso todo, con estos conocimientos ya puedes empezar a usar el DOM para añadir interactividad a tu pagina sin necesidad de incluir librerías y dependencias. 
+Y eso todo, con estos conocimientos ya puedes empezar a usar el DOM para añadir interactividad a tu pagina sin necesidad de incluir librerías y dependencias :D 
 
 ---
 
